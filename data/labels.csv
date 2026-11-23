@@ -1,0 +1,18 @@
+frame_time,x1,y1,x2,y2,label,note
+2026-11-21T04:31:52+00:00,,,,,good,user 2026-11-22: the only meteor on night 2026-11-20's contact sheet (then #470)
+2026-11-22T18:27:46+00:00,907,495,878,502,good,user 2026-11-23: most convincing of night 2026-11-22 (then #11723)
+2026-11-22T16:51:27+00:00,754,520,721,512,not_good,twilight; one object across three frames
+2026-11-22T16:51:42+00:00,670,500,637,491,not_good,twilight; one object across three frames
+2026-11-22T16:51:57+00:00,589,478,557,468,not_good,twilight; one object across three frames
+2026-11-22T17:47:02+00:00,844,129,744,118,not_good,user: not aesthetic (colour-banded; maybe aircraft)
+2026-11-22T17:47:17+00:00,914,151,886,142,not_good,by the trees; follows 17:47:02
+2026-11-22T17:53:03+00:00,922,153,898,144,not_good,by the trees
+2026-11-22T18:20:31+00:00,725,432,697,424,not_good,user: not aesthetic
+2026-11-22T18:34:01+00:00,696,475,700,498,not_good,user: not aesthetic
+2026-11-22T18:34:16+00:00,706,533,709,554,not_good,user: not aesthetic
+2026-11-22T19:15:18+00:00,1004,399,1028,447,not_good,user: not aesthetic
+2026-11-22T20:17:57+00:00,597,323,554,323,not_good,cloud
+2026-11-22T20:18:12+00:00,499,327,478,328,not_good,cloud
+2026-11-22T20:27:02+00:00,682,444,597,438,not_good,cloud glow
+2026-11-22T20:39:03+00:00,936,167,913,157,not_good,by the trees
+2026-11-23T05:39:31+00:00,758,62,734,59,not_good,glare
