@@ -49,6 +49,7 @@ BEAD_DENSITY_MIN = 3.0       # ...at least this many per 100 px
 COLOUR_VAR_MIN = 0.15        # aircraft: red/green alternation along the trail
 RIPPLE_REL_MIN = 0.25        # aircraft: strobe beads (profile swing / level)...
 RIPPLE_MIN = 1.5             # ...and in noise units, so faint noisy trails don't count
+RIPPLE_BEADS_MIN = 3         # ...and repeated peaks: one flare on a short meteor isn't a strobe
 SIDE_RATIO_MAX = 0.5         # cloud: glow beside the line this bright relative to it
 LOCAL_ACTIVITY_MAX = 0.1     # cloud: share of the sky around the streak that changed
                              # (2026-11-21 moonlit wisps 0.16-0.91; meteor 0.005)
@@ -261,7 +262,8 @@ def score(f):
     c += 10 * clip01((f['elong'] - 5) / 20)              # thin and straight
     c += 10 * clip01((f['peak_snr'] - 5) / 20)
     c += 10 if f.get('shower') else 0
-    c -= 20 * clip01((f['ripple_rel'] - 0.15) / 0.1)     # strobe ripple
+    if f['beads'] >= RIPPLE_BEADS_MIN:
+        c -= 20 * clip01((f['ripple_rel'] - 0.15) / 0.1)  # strobe ripple
     c -= 20 * clip01((f['dashed'] - 0.2) / 0.3)          # dashes
     c -= 15 * clip01((f['side_ratio'] - 0.25) / 0.25)    # cloud glow alongside
     c -= 10 if f['coverage'] < 0.6 else 0                # broken up
@@ -282,7 +284,7 @@ def shape_veto(f):
         return 'aircraft', f'beaded trail ({f["beads"]} strobe peaks)'
     if f['colour_var'] >= COLOUR_VAR_MIN and f['beads'] >= 3:
         return 'aircraft', f'red/green lights (colour variation {f["colour_var"]})'
-    if f['ripple_rel'] >= RIPPLE_REL_MIN and f['ripple'] >= RIPPLE_MIN:
+    if f['ripple_rel'] >= RIPPLE_REL_MIN and f['ripple'] >= RIPPLE_MIN and f['beads'] >= RIPPLE_BEADS_MIN:
         return 'aircraft', f'strobe ripple ({f["ripple_rel"]})'
     if f['local_activity'] >= LOCAL_ACTIVITY_MAX:
         return 'cloud', f'sky changing around it ({f["local_activity"]:.0%})'
