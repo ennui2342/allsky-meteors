@@ -31,6 +31,8 @@ OVERLAP_DEG = 3.0    # slack along the path (timestamp and download jitter)
 CELESTRAK_URL = 'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle'
 CACHE_HOURS = 24     # Celestrak asks clients not to fetch the same data more often than it updates
 RETRY_HOURS = 3      # after a failed fetch
+# identify ourselves: Celestrak refuses generic library user agents (403)
+USER_AGENT = 'allsky-meteors/1.0 (+https://github.com/ennui2342/allsky-meteors)'
 
 
 def _celestrak(cache):
@@ -45,7 +47,7 @@ def _celestrak(cache):
         cache.parent.mkdir(parents=True, exist_ok=True)
         attempt.touch()
         try:
-            req = urllib.request.Request(CELESTRAK_URL, headers={'User-Agent': 'allsky-meteors'})
+            req = urllib.request.Request(CELESTRAK_URL, headers={'User-Agent': USER_AGENT})
             with urllib.request.urlopen(req, timeout=60) as r:
                 text = r.read().decode('ascii', 'replace')
             if text.count('\n1 ') > 100:
